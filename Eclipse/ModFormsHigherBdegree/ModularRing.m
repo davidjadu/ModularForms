@@ -51,6 +51,8 @@ d[Algebra[D][k_]]:=Join[{1,1,1,1},Array[2&,k-3]]
 w[Algebra[D][k_]]:=Join[{0,k},Range[2,2k-2,2]]
 wlabel[Algebra[D][k_]]:= Join[{0,{k,1}},Range[2,2k-2,2]]
 
+wlabel[a_]:=w[a]
+
 d[G2] = {1, 1, 2};
 w[G2] = {0, 2, 6};
 

@@ -1,0 +1,405 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     15614,        397]
+NotebookOptionsPosition[     14365,        367]
+NotebookOutlinePosition[     14765,        383]
+CellTagsIndexPosition[     14722,        380]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"TableForm", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"guessing", "[", 
+          RowBox[{"{", 
+           RowBox[{"g", ",", "m0", ",", 
+            RowBox[{"m3", "+", "g"}], ",", 
+            RowBox[{"m2", "+", "g"}], ",", "g"}], "}"}], "]"}], "-", 
+         RowBox[{"GVA2", "[", 
+          RowBox[{"{", 
+           RowBox[{"m0", ",", "m0", ",", "m2", ",", "m3"}], "}"}], "]"}]}], "/.", 
+        RowBox[{
+         RowBox[{"Missing", "[", "__", "]"}], "->", "\"\<N\>\""}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"m2", ",", "0", ",", "20", ",", "1"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"m3", ",", "0", ",", "20", ",", "1"}], "}"}]}], "]"}], ",", 
+     RowBox[{"TableHeadings", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Range", "[", 
+          RowBox[{"0", ",", "20"}], "]"}], "//", "N"}], ",", 
+        RowBox[{
+         RowBox[{"Range", "[", 
+          RowBox[{"0", ",", "20"}], "]"}], "//", "N"}]}], "}"}]}]}], "]"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"m0", ",", "0", ",", "3", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"g", ",", "0", ",", "4", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7976187543038735`*^9, 3.7976187648663144`*^9}},
+ CellLabel->"In[69]:=",ExpressionUUID->"ab9b0302-7639-4dcc-966b-fe5c66292481"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`g$$ = 0, $CellContext`m0$$ = 0, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`m0$$], 0, 3, 1}, {
+      Hold[$CellContext`g$$], 0, 4, 1}}, Typeset`size$$ = {
+    7379., {182., 188.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`g$$ = 0, $CellContext`m0$$ = 0}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> TableForm[
+        Table[
+         ReplaceAll[$CellContext`guessing[{$CellContext`g$$, \
+$CellContext`m0$$, $CellContext`m3 + $CellContext`g$$, $CellContext`m2 + \
+$CellContext`g$$, $CellContext`g$$}] - $CellContext`GVA2[{$CellContext`m0$$, \
+$CellContext`m0$$, $CellContext`m2, $CellContext`m3}], Missing[
+            BlankSequence[]] -> "N"], {$CellContext`m2, 0, 20, 
+          1}, {$CellContext`m3, 0, 20, 1}], TableHeadings -> {
+          N[
+           Range[0, 20]], 
+          N[
+           Range[0, 20]]}], 
+      "Specifications" :> {{$CellContext`m0$$, 0, 3, 1}, {$CellContext`g$$, 0,
+          4, 1}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{2.147483636*^9, {243., 249.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.7976187653315315`*^9},
+ CellLabel->"Out[69]=",ExpressionUUID->"b229817d-52b8-4661-9895-1e63d2c2a9c4"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"guessing2", "[", 
+   RowBox[{"{", 
+    RowBox[{"g_", ",", "m0_", ",", "m1_", ",", "m2_", ",", "m3_"}], "}"}], 
+   "]"}], ":=", 
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"m2", "<", "m1"}], ",", 
+    RowBox[{"res", "[", 
+     RowBox[{"{", 
+      RowBox[{"g", ",", "m0", ",", "m2", ",", "m1", ",", "m3"}], "}"}], "]"}],
+     ",", 
+    RowBox[{"res", "[", 
+     RowBox[{"{", 
+      RowBox[{"g", ",", "m0", ",", "m1", ",", "m2", ",", "m3"}], "}"}], 
+     "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.797619136559661*^9, 3.7976191698083744`*^9}},
+ CellLabel->"In[80]:=",ExpressionUUID->"c21f97b9-c7c0-4a42-aeab-5dcf6626816b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"TableForm", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"guessing2", "[", 
+         RowBox[{"{", 
+          RowBox[{"g", ",", "m0", ",", 
+           RowBox[{"m3", "+", "g"}], ",", 
+           RowBox[{"m2", "+", "g"}], ",", "g"}], "}"}], "]"}], "/.", 
+        RowBox[{
+         RowBox[{"Missing", "[", "__", "]"}], "->", "\"\<N\>\""}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"m2", ",", "0", ",", "20", ",", "1"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"m3", ",", "0", ",", "20", ",", "1"}], "}"}]}], "]"}], ",", 
+     RowBox[{"TableHeadings", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Range", "[", 
+          RowBox[{"0", ",", "20"}], "]"}], "//", "N"}], ",", 
+        RowBox[{
+         RowBox[{"Range", "[", 
+          RowBox[{"0", ",", "20"}], "]"}], "//", "N"}]}], "}"}]}]}], "]"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"m0", ",", "0", ",", "3", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"g", ",", "0", ",", "4", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.797618830599936*^9, {3.797618871537218*^9, 3.7976189280574803`*^9}, {
+   3.7976190633394647`*^9, 3.797619066640106*^9}, {3.7976191770104685`*^9, 
+   3.79761918039229*^9}},
+ CellLabel->"In[81]:=",ExpressionUUID->"f8831b93-07ed-44e5-b523-bb53acc1df67"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`g$$ = 0, $CellContext`m0$$ = 0, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`m0$$], 0, 3, 1}, {
+      Hold[$CellContext`g$$], 0, 4, 1}}, Typeset`size$$ = {
+    4467., {182., 188.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`g$$ = 0, $CellContext`m0$$ = 0}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> TableForm[
+        Table[
+         ReplaceAll[
+          $CellContext`guessing2[{$CellContext`g$$, $CellContext`m0$$, \
+$CellContext`m3 + $CellContext`g$$, $CellContext`m2 + $CellContext`g$$, \
+$CellContext`g$$}], Missing[
+            BlankSequence[]] -> "N"], {$CellContext`m2, 0, 20, 
+          1}, {$CellContext`m3, 0, 20, 1}], TableHeadings -> {
+          N[
+           Range[0, 20]], 
+          N[
+           Range[0, 20]]}], 
+      "Specifications" :> {{$CellContext`m0$$, 0, 3, 1}, {$CellContext`g$$, 0,
+          4, 1}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{4518., {243., 249.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.7976189286085634`*^9, 3.797619067413374*^9, 
+  3.7976191810665617`*^9},
+ CellLabel->"Out[81]=",ExpressionUUID->"c1e80bd4-7a78-48c1-90b5-d332c51e9b85"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"TableForm", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"GVA2", "[", 
+         RowBox[{"{", 
+          RowBox[{"g", ",", "m0", ",", "m2", ",", "m3"}], "}"}], "]"}], "/.", 
+        RowBox[{
+         RowBox[{"Missing", "[", "__", "]"}], "->", "\"\<N\>\""}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"m2", ",", "0", ",", "20", ",", "1"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"m3", ",", "0", ",", "20", ",", "1"}], "}"}]}], "]"}], ",", 
+     RowBox[{"TableHeadings", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Range", "[", 
+          RowBox[{"0", ",", "20"}], "]"}], "//", "N"}], ",", 
+        RowBox[{
+         RowBox[{"Range", "[", 
+          RowBox[{"0", ",", "20"}], "]"}], "//", "N"}]}], "}"}]}]}], "]"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"m0", ",", "0", ",", "3", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"g", ",", "0", ",", "4", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.797618841927595*^9, {3.7976196817057457`*^9, 3.797619683143459*^9}},
+ CellLabel->"In[88]:=",ExpressionUUID->"1d40e746-30f8-4c18-b0e5-803a4671460b"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`g$$ = 0, $CellContext`m0$$ = 1, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`m0$$], 0, 3, 1}, {
+      Hold[$CellContext`g$$], 0, 4, 1}}, Typeset`size$$ = {
+    3354., {182., 188.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`g$$ = 0, $CellContext`m0$$ = 0}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> TableForm[
+        Table[
+         ReplaceAll[
+          $CellContext`GVA2[{$CellContext`g$$, $CellContext`m0$$, \
+$CellContext`m2, $CellContext`m3}], Missing[
+            BlankSequence[]] -> "N"], {$CellContext`m2, 0, 20, 
+          1}, {$CellContext`m3, 0, 20, 1}], TableHeadings -> {
+          N[
+           Range[0, 20]], 
+          N[
+           Range[0, 20]]}], 
+      "Specifications" :> {{$CellContext`m0$$, 0, 3, 1}, {$CellContext`g$$, 0,
+          4, 1}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{3405., {243., 249.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.7976188431016607`*^9, 3.797619506901913*^9, {3.797619684058573*^9, 
+   3.7976196872979565`*^9}},
+ CellLabel->"Out[88]=",ExpressionUUID->"cd3b9bd6-2b1a-45b2-b2b8-710e9dc5d7e8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PositionIndex", "[", "res", "]"}], "[", "56", "]"}]], "Input",
+ CellChangeTimes->{{3.7976196063638663`*^9, 3.797619617543912*^9}, {
+  3.797619787290394*^9, 3.7976197880320697`*^9}},
+ CellLabel->"In[89]:=",ExpressionUUID->"1b6ff917-d2e6-4e95-88e7-ea8ac264c313"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "3", ",", "9", ",", "4", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "3", ",", "6", ",", "5", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "3", ",", "1", ",", "5", ",", "10"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "3", ",", "1", ",", "5", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "3", ",", "0", ",", "8", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "3", ",", "0", ",", "5", ",", "9"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "3", ",", "0", ",", "5", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "15", ",", "2", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "6", ",", "5", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "3", ",", "5", ",", "10"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "3", ",", "5", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "3", ",", "2", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "3", ",", "2", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "0", ",", "14", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "15", ",", "2", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "9", ",", "4", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "3", ",", "8", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "3", ",", "2", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "3", ",", "2", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1", ",", "14", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "14", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "8", ",", "3"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.7976196182634025`*^9, 3.797619788722469*^9},
+ CellLabel->"Out[89]=",ExpressionUUID->"34ac5a01-dd9b-41d5-afe9-e96b9b54bce6"]
+}, Open  ]]
+},
+WindowSize->{1904, 981},
+WindowMargins->{{0, Automatic}, {768, Automatic}},
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"17405b76-82ef-45da-affd-240b8824feae"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1448, 38, 28, "Input",ExpressionUUID->"ab9b0302-7639-4dcc-966b-fe5c66292481"],
+Cell[2031, 62, 2181, 45, 511, "Output",ExpressionUUID->"b229817d-52b8-4661-9895-1e63d2c2a9c4"]
+}, Open  ]],
+Cell[4227, 110, 664, 18, 28, "Input",ExpressionUUID->"c21f97b9-c7c0-4a42-aeab-5dcf6626816b"],
+Cell[CellGroupData[{
+Cell[4916, 132, 1416, 37, 28, "Input",ExpressionUUID->"f8831b93-07ed-44e5-b523-bb53acc1df67"],
+Cell[6335, 171, 2137, 46, 511, "Output",ExpressionUUID->"c1e80bd4-7a78-48c1-90b5-d332c51e9b85"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8509, 222, 1234, 33, 28, "Input",ExpressionUUID->"1d40e746-30f8-4c18-b0e5-803a4671460b"],
+Cell[9746, 257, 2102, 46, 511, "Output",ExpressionUUID->"cd3b9bd6-2b1a-45b2-b2b8-710e9dc5d7e8"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11885, 308, 295, 5, 28, "Input",ExpressionUUID->"1b6ff917-d2e6-4e95-88e7-ea8ac264c313"],
+Cell[12183, 315, 2166, 49, 52, "Output",ExpressionUUID->"34ac5a01-dd9b-41d5-afe9-e96b9b54bce6"]
+}, Open  ]]
+}
+]
+*)
+

@@ -1,0 +1,220 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8356,        212]
+NotebookOptionsPosition[      8003,        198]
+NotebookOutlinePosition[      8402,        214]
+CellTagsIndexPosition[      8359,        211]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"expressInTermsOfGenerators", "[", 
+    RowBox[{"seedsList_", ",", "genList_", ",", "poly_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"moniToVector", "[", "x_", "]"}], ":=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Exponent", "[", 
+          RowBox[{"x", ",", 
+           RowBox[{"X", "[", "#", "]"}]}], "]"}], "&"}], "/@", 
+        RowBox[{"Range", "[", 
+         RowBox[{"Length", "[", "seedsList", "]"}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"allEntriesPositiveOrZero", "[", "list_", "]"}], ":=", " ", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"And", "@@", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "\[GreaterEqual]", " ", "0"}], "&"}], "/@", 
+            "list"}], ")"}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"AbsEnts", "[", "x_", "]"}], ":=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Abs", "[", "#", "]"}], "&"}], "/@", "x"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"nGens", "=", 
+       RowBox[{
+        RowBox[{"Length", "[", "genList", "]"}], "-", "1"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"XList", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"X", "[", "#", "]"}], "&"}], "/@", 
+        RowBox[{"Range", "[", "nGens", "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Xto1", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "\[Rule]", " ", "1"}], "&"}], "/@", "XList"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"subPgen", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"P", "[", "#", "]"}], "->", " ", 
+          RowBox[{"genList", "[", 
+           RowBox[{"[", 
+            RowBox[{"#", "+", "1"}], "]"}], "]"}]}], "&"}], "/@", 
+        RowBox[{"Range", "[", 
+         RowBox[{"0", ",", "nGens"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"seedsListT", "=", 
+       RowBox[{"Transpose", "[", "seedsList", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"polyRed", "=", "poly"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"decompList", "=", 
+       RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"i", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"While", "[", 
+       RowBox[{
+        RowBox[{"!", 
+         RowBox[{"NumberQ", "[", "polyRed", "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"polyToMonis", "=", 
+          RowBox[{"List", "@@", 
+           RowBox[{"Expand", "[", "polyRed", "]"}]}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"monisToVectors", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"moniToVector", "[", "#", "]"}], "&"}], "/@", 
+           "polyToMonis"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"decompositions", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"LinearSolve", "[", 
+             RowBox[{"seedsListT", ",", "#"}], "]"}], "&"}], "/@", 
+           "monisToVectors"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"linGenListVectors", "=", 
+          RowBox[{"Select", "[", 
+           RowBox[{"decompositions", ",", 
+            RowBox[{
+             RowBox[{"allEntriesPositiveOrZero", "[", "#", "]"}], "&"}]}], 
+           "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"nOfg", "=", 
+          RowBox[{"Length", "[", "linGenListVectors", "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"linGenListMonis", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"vectorToMonis", "[", "#", "]"}], "&"}], "/@", 
+           "linGenListVectors"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"posPosEs", "=", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Position", "[", 
+              RowBox[{"decompositions", ",", "#"}], "]"}], "&"}], "/@", 
+            "linGenListVectors"}], "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"posXVs", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"monisToVectors", "[", 
+             RowBox[{"[", "#", "]"}], "]"}], "&"}], "/@", "posPosEs"}]}], ";",
+          "\[IndentingNewLine]", 
+         RowBox[{"posXs", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"polyToMonis", "[", 
+             RowBox[{"[", "#", "]"}], "]"}], "&"}], "/@", "posPosEs"}]}], ";",
+          "\[IndentingNewLine]", 
+         RowBox[{"sumsList", "=", 
+          RowBox[{"Plus", "@@@", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"AbsEnts", "[", "#", "]"}], "&"}], "/@", "posXVs"}], 
+            ")"}]}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"maxSumsList", "=", 
+          RowBox[{"Max", "[", 
+           RowBox[{"Plus", "@@@", "sumsList"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"posT", "=", 
+          RowBox[{
+           RowBox[{"Flatten", "[", 
+            RowBox[{"Position", "[", 
+             RowBox[{"sumsList", ",", "maxSumsList"}], "]"}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"coeff", "=", 
+          RowBox[{
+           RowBox[{"posXs", "[", 
+            RowBox[{"[", "posT", "]"}], "]"}], "/.", "Xto1"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"monomInGens", "=", 
+          RowBox[{"coeff", " ", 
+           RowBox[{"linGenListMonis", "[", 
+            RowBox[{"[", "posT", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"decompList", "=", 
+          RowBox[{"Join", "[", 
+           RowBox[{"decompList", ",", 
+            RowBox[{"{", "monomInGens", "}"}]}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"polyRed", "=", 
+          RowBox[{"Expand", "[", 
+           RowBox[{
+            RowBox[{"polyRed", "-", "monomInGens"}], "/.", "subPgen"}], 
+           "]"}]}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"decompList", "=", 
+       RowBox[{"Join", "[", 
+        RowBox[{"decompList", ",", 
+         RowBox[{"{", "polyRed", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Plus", "@@", "decompList"}]}]}], "]"}]}], "\n"}]], "Input",
+ CellChangeTimes->{
+  3.8026856488519506`*^9, {3.8026877172685223`*^9, 3.802687799992283*^9}, {
+   3.802687833246943*^9, 3.80268789656349*^9}, {3.802688336986129*^9, 
+   3.802688470588092*^9}, {3.802688582531315*^9, 3.802688586400454*^9}, {
+   3.802688663591537*^9, 3.8026886714968987`*^9}, {3.802688727604376*^9, 
+   3.802688743748007*^9}, {3.802688797813876*^9, 3.80268879937838*^9}, {
+   3.802689118751237*^9, 3.802689160047266*^9}, {3.8026892939783583`*^9, 
+   3.80268929697654*^9}, {3.802689558411003*^9, 3.802689588285021*^9}, {
+   3.802689653756897*^9, 3.8026896608166847`*^9}, {3.8026897599593477`*^9, 
+   3.802689813641712*^9}, {3.8026901420448437`*^9, 3.802690142783497*^9}, {
+   3.8026901812431498`*^9, 3.80269018216194*^9}, {3.802690251259511*^9, 
+   3.802690258314391*^9}, {3.802690302431328*^9, 3.80269038003102*^9}, {
+   3.802691102889064*^9, 3.802691107159667*^9}, 3.802691137659481*^9, {
+   3.802693019553371*^9, 3.802693028918407*^9}},
+ CellLabel->"In[46]:=",ExpressionUUID->"bcdf714f-17d2-4e2b-8f12-6d09d56ea9e9"]
+},
+WindowSize->{808, 709},
+WindowMargins->{{Automatic, 215}, {Automatic, 0}},
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"1fe0c5de-e211-46e1-9f26-a1f4384ce1f3"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 7441, 176, 637, "Input",ExpressionUUID->"bcdf714f-17d2-4e2b-8f12-6d09d56ea9e9"]
+}
+]
+*)
+

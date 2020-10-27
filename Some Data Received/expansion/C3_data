@@ -1,0 +1,46 @@
+rank = 3
+ 
+rankO = 3
+ 
+hcox = 4
+ 
+mark = {1, 2, 2}
+ 
+nposlongRoots = 3
+ 
+nposshortRoots = 6
+ 
+nroots = 18
+ 
+wiGens = {{0, 1}, {-2, 1}, {-4, 1}, {-6, 2}}
+ 
+ratioRootLengths = 2
+ 
+simpleRootsO = {{1, -1, 0}, {0, 1, -1}, {0, 0, 2}}
+ 
+posRootsAlphaBasis = {{2, 2, 1}, {1, 2, 1}, {0, 2, 1}, {1, 1, 1}, {0, 1, 1}, 
+     {1, 1, 0}, {0, 1, 0}, {0, 0, 1}, {1, 0, 0}}
+ 
+posLongRootsAlphaBasis = {{2, 2, 1}, {0, 2, 1}, {0, 0, 1}}
+ 
+posShortRootsAlphaBasis = {{1, 2, 1}, {1, 1, 1}, {0, 1, 1}, {1, 1, 0}, 
+     {0, 1, 0}, {1, 0, 0}}
+ 
+fracLong = 1/2
+ 
+fracShort = 1/2
+ 
+seedsList = {{1, 0, 0}, {1, 1, 0}, {1/2, 1/2, 1/2}}
+ 
+p[1] = X[1]^(-1) + X[1] + X[2]^(-1) + X[2] + X[3]^(-1) + X[3]
+ 
+p[2] = 1/(X[1]*X[2]) + X[1]/X[2] + X[2]/X[1] + X[1]*X[2] + 1/(X[1]*X[3]) + 
+     X[1]/X[3] + 1/(X[2]*X[3]) + X[2]/X[3] + X[3]/X[1] + X[1]*X[3] + 
+     X[3]/X[2] + X[2]*X[3]
+ 
+p[3] = 1/(Sqrt[X[1]]*Sqrt[X[2]]*Sqrt[X[3]]) + 
+     Sqrt[X[1]]/(Sqrt[X[2]]*Sqrt[X[3]]) + 
+     Sqrt[X[2]]/(Sqrt[X[1]]*Sqrt[X[3]]) + (Sqrt[X[1]]*Sqrt[X[2]])/
+      Sqrt[X[3]] + Sqrt[X[3]]/(Sqrt[X[1]]*Sqrt[X[2]]) + 
+     (Sqrt[X[1]]*Sqrt[X[3]])/Sqrt[X[2]] + (Sqrt[X[2]]*Sqrt[X[3]])/
+      Sqrt[X[1]] + Sqrt[X[1]]*Sqrt[X[2]]*Sqrt[X[3]]

@@ -1,0 +1,36 @@
+rank = 2
+ 
+rankO = 3
+ 
+hcox = 4
+ 
+mark = {3, 2}
+ 
+nposlongRoots = 3
+ 
+nposshortRoots = 3
+ 
+nroots = 12
+ 
+wiGens = {{0, 1}, {-2, 1}, {-6, 2}}
+ 
+ratioRootLengths = 3
+ 
+simpleRootsO = {{1, -1, 0}, {-2, 1, 1}}
+ 
+posRootsAlphaBasis = {{3, 2}, {3, 1}, {2, 1}, {1, 1}, {0, 1}, {1, 0}}
+ 
+posLongRootsAlphaBasis = {{3, 2}, {3, 1}, {0, 1}}
+ 
+posShortRootsAlphaBasis = {{2, 1}, {1, 1}, {1, 0}}
+ 
+fracLong = 3/4
+ 
+fracShort = 1/4
+ 
+seedsList = {{-1, -2}, {-1, -1}}
+ 
+p[1] = 1/(X[1]*X[2]^2) + 1/(X[1]^2*X[2]) + X[1]/X[2] + X[2]/X[1] + 
+     X[1]^2*X[2] + X[1]*X[2]^2
+ 
+p[2] = X[1]^(-1) + X[1] + X[2]^(-1) + 1/(X[1]*X[2]) + X[2] + X[1]*X[2]
