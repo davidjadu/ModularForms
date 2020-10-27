@@ -81,7 +81,7 @@ SolveInWeylInvariants[algebra_, toexpand_, Max_:M] := Module[
   For[qorder = 0, qorder <= Max, qorder++,
    expan[qorder] = PowerExpand[(D[Normal[toexpand], {q, qorder}] /. q -> 0)/
      qorder!/.XtoTbasis[algebra]];
-   sol[qorder] =PolyToWeyl[D8,expan[qorder]]
+   sol[qorder] =PolyToWeyl[algebra,expan[qorder]]
    ];
   Sum[sol[qorder] q^qorder, {qorder, 0, 
      Max}]]
@@ -127,8 +127,7 @@ PolyToWeyl[algebra_, poly_] :=
   Plus @@ decompList]  
 
 \[Phi]weyl[i__, algebra_, max_ : M] := \[Phi]weyl[i, algebra,max] = 
-  SolveInWeylInvariants[algebra, \[Phi][i, algebra], 
-   d[algebra][[Position[wlabel[algebra], i][[1]][[1]]]], max]
+  SolveInWeylInvariants[algebra, \[Phi][i, algebra], max]
 
 
 (* ::Subsubsection:: *)

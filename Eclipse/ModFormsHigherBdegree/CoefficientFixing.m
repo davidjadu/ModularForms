@@ -2,7 +2,7 @@
 
 (* Wolfram Language Package *)
 
-BeginPackage["CoefficientFixing`", { "Denominator`", "RootsHandling`", "NumeratorIndices`", "ModularRing`", "LieART`","WeylInvariantPolynomials`"}]
+BeginPackage["CoefficientFixing`", { "Special`", "Denominator`", "RootsHandling`", "NumeratorIndices`", "ModularRing`", "LieART`","WeylInvariantPolynomials`"}]
 (* Exported symbols added here with SymbolName::usage *)  
 
 solve::usage="das ist good "
