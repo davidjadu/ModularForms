@@ -8,9 +8,11 @@ this is so I don't mess up the program that is working. "
 
 Begin["`Private`"] (* Begin Private Context *) 
 
-TtoXbasis[B5]:=Solve[Table[X[i]==(X[i]/.XtoTbasis[B5]),{i,1,5}],Array[t[B5,#]&,5]][[1]]
+TtoXbasis[C5]:=Solve[Table[X[i]==(X[i]/.XtoTbasis[C5]),{i,1,5}],Array[t[C5,#]&,5]][[1]]
 
-tInvS[a_]:=tInv[B5,a]/.TtoXbasis[B5]/.XtoTbasis[D5]//PowerExpand
+tInvS[a_]:=tInv[C5,a]/.TtoXbasis[C5]/.XtoTbasis[D5]//PowerExpand
+
+
 
 tInvExposS := 
  Table[SortBy[

@@ -150,7 +150,7 @@ ExpandInJacobiForms[algebra_, toexpand_, index_, weight_, max_:M] :=
 	
 	Print["The number of terms to solve is ",numTerms];
       
-    Print[terms];
+   (* Print[terms];*)
       
   Monitor[Ansatz = 
    Sum[c[i] Expand[##[[i]] /. {\[Phi][a_, b_, algebra] :> \[Phi]weyl[
