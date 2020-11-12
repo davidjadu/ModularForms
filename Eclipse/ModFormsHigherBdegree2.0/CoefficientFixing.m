@@ -2,12 +2,14 @@
 
 (* Wolfram Language Package *)
 
-BeginPackage["CoefficientFixing`", { "Special`", "Denominator`", "RootsHandling`", "NumeratorIndices`", "ModularRing`", "LieART`","WeylInvariantPolynomials`"}]
+BeginPackage["CoefficientFixing`", { "DenominatorBaseDeg1`","Special`", "Denominator`", "RootsHandling`", "NumeratorIndices`", "ModularRing`", "LieART`","WeylInvariantPolynomials`"}]
 (* Exported symbols added here with SymbolName::usage *)  
 
 solve::usage="das ist good "
 getGVInvariants::usage="functions that returns the GV invariants given the num expansion"
 JacSol::usage="When using solve, the results are saved in here"
+
+givePoly2::usage="To fix"
 
 Begin["`Private`"] (* Begin Private Context *) 
 
@@ -52,12 +54,12 @@ Options[solve]={SavingPath->False,FileName-> Null,bound->10,Shift->0,Tshift->Fal
 
 solve[algebra_,nbase_ (*, inv_*),inst_,M_: M,OptionsPattern[]] := 
 (* solve[algebra, M] =*) 
-  Module[{df, fde, fullfact, gw,
-    NumberofTerms,FandQ0factor,toSolve,sol,num,numsolved,numUnsolved,
-     Pde,pnAnsatz,pn, tt,ZZ, tshift,ntnt,nt, \[Epsilon], FullSol,index,jacsol,tbound,extrafactor,tboundMax,fullfactexpo,pnexpansion},
+  Module[{df, fde, fullfact, gw,FandQ0factor,num,numsolved,numUnsolved,
+     Pde,pn, tt,ZZ, tshift,ntnt,nt, \[Epsilon],jacsol,tbound,extrafactor,tboundMax,fullfactexpo,pnexpansion,max,de,ff},
    Print["I am starting"];
    Print[Now];
    Off[Solve::svars]; (*To avoid the error message*)
+   max=M;
    tt = Array[t[algebra,#]&, Rank[algebra]];
    ZZ = Array[Z[algebra,#]&,Rank[algebra]];
    ntnt = Array[nt[algebra,#]&, Rank[algebra]];
@@ -67,8 +69,7 @@ solve[algebra_,nbase_ (*, inv_*),inst_,M_: M,OptionsPattern[]] :=
    	extrafactor=Times@@(tt^OptionValue[Tshift]); tshift=OptionValue[Tshift]];
    
    If[OptionValue[debugging],Print[extrafactor, " and ", tshift]];
-   
-   
+   ff[qorder2_]:=1/(Times @@ (ZZ^(FHighestRoot[algebra])))^((*(nbase-2)*)Max[0,nbase-2]- qorder2)/.ZtoTbasis//PowerExpand;
    fullfact[qorder2_] := extrafactor*
     fde/(Times @@ (ZZ^(FHighestRoot[algebra])))^((*(nbase-2)*)Max[0,nbase-2]- qorder2)/.ZtoTbasis//PowerExpand;
    fullfactexpo[qorder2_]:=Exponent[fullfact[qorder2]/.t[__]:>t,t];
@@ -84,34 +85,43 @@ solve[algebra_,nbase_ (*, inv_*),inst_,M_: M,OptionsPattern[]] :=
    
    
    Print["Getting the denominator",Now];
-   Pde=
-       Series[Coefficient[
-          fde (Series[De[algebra,1,nbase] // Normal, {q, 0, M}] // 
-               Normal) /. 
-            q -> Q[0] (Times @@ (ZZ^(FHighestRoot[algebra])/.ZtoTbasis)) /. 
-           t[name__] -> \[Epsilon] t[name], x], {\[Epsilon], 0, tboundMax}] // 
-      Normal;
+   de=Normal[De1[algebra,max]]/.q -> Q[0] (Times @@ (ZZ^(FHighestRoot[algebra])))/.ZtoTbasis/.t[name__] :> \[Epsilon] t[name];
       
    
    Print["Getting the invariants",Now];
    gw=Module[{cleanInst,ZtoTInvariants},
    cleanInst = Select[Normal[inst], #[[1]][[-1]] == 0 && #[[1]][[-2]] == 1 &]; (*Fixes the base degree to 1 and fiber to 0*)
    ZtoTInvariants[m__] := Join[expo[algebra] m[[1 ;; Rank[algebra]]], {m[[Rank[algebra] + 1]] +
-     nbase - 2}, m[[Rank[algebra] + 2 ;; -1]]]; (* Writes the invariant in the t-basis, also takes care of the Q0 in the prefactor*)
+     Max[nbase - 2,0]}, m[[Rank[algebra] + 2 ;; -1]]]; (* Writes the invariant in the t-basis, also takes care of the Q0 in the prefactor*)
    ZtoTInvariants[#[[1]]] -> #[[2]] & /@ cleanInst
    ];
 
 	Print["Getting the numerator",Now];
 
    FandQ0factor=FromCoefficientRules[gw,Join[tt,{Q[0],Qb,Qf}]]/. {Qb -> 1, Qf -> 0} /. 
-  t[name__] :> \[Epsilon] t[name];
-   
-   pn=(FandQ0factor*Pde//Expand)/.Q[0]^m_/;m>M:>0/. \[Epsilon]^n_ /; n > tboundMax :> 0/.\[Epsilon]->1;
+  t[name__] :> \[Epsilon] t[name]/.Q[0]^m_/;m>M:>0;
+  
+  
+  pn[0]=With[{bound=fullfactexpo[0]-tbound[0]},
+  	((Expand[# - Coefficient[#, \[Epsilon], 0] - \[Epsilon] Coefficient[#, \[Epsilon], 1]] &@
+      Expand[Expand[(1/ff[0])(FandQ0factor/.Q[0]->0)(de/.Q[0]->0)]]) /. (\[Epsilon]^
+        n_ /; n > -bound :> 0)) /. \[Epsilon] -> 1];
+  pn[1]=With[{bound=fullfactexpo[1]-tbound[1]},
+  	((Expand[# - Coefficient[#, \[Epsilon], 0] - \[Epsilon] Coefficient[#, \[Epsilon], 1]] &@
+      Expand[Expand[(1/ff[1])((FandQ0factor/.Q[0]->0)Coefficient[de,Q[0]]+Coefficient[FandQ0factor,Q[0]](de/.Q[0]->0))]]) /. (\[Epsilon]^
+        n_ /; n > -bound :> 0)) /. \[Epsilon] -> 1];
+   (*
+   pn[0]=Expand[(FandQ0factor/.Q[0]->0)(de/.Q[0]->0)]/.\[Epsilon]->1;
+   pn[1]=Expand[(FandQ0factor/.Q[0]->0)Coefficient[de,Q[0]]+Coefficient[FandQ0factor,Q[0]](de/.Q[0]->0)]/.\[Epsilon]->1;
+   *)
+  (* pn=(FandQ0factor*de//Expand)/.Q[0]^m_/;m>M:>0/. \[Epsilon]^n_ /; n > tboundMax :> 0/.\[Epsilon]->1;*)
+	(*Return[pn];*)
 
 	Print["Solving in Weyl. pol.",Now];
 
 	numsolved[qorder2_]:=numsolved[qorder2]=
-   (PolyToWeylIncomplete[algebra,Expand[fullfact[qorder2]^-1 *(1/qorder2!)D[pn,{Q[0],qorder2}]/.Q[0]->0],Max[0,fullfactexpo[qorder2]-tbound[qorder2]]]);
+	(PolyToWeylIncomplete[algebra,Expand[pn[qorder2]],Max[0,fullfactexpo[qorder2]-tbound[qorder2]]]);
+  (* (PolyToWeylIncomplete[algebra,Expand[(1/ff[qorder2]) *(1/qorder2!)D[pn,{Q[0],qorder2}]/.Q[0]->0],Max[0,fullfactexpo[qorder2]-tbound[qorder2]]]);*)
 (*This is the part that can actually be completely solved*)
 
 	numUnsolved[qorder2_]:=  numUnsolved[qorder2]= givePoly2[algebra,fullfact[qorder2],df+qorder2,tbound[qorder2],{num,qorder2}];
@@ -125,8 +135,14 @@ solve[algebra_,nbase_ (*, inv_*),inst_,M_: M,OptionsPattern[]] :=
    
    pnexpansion=Sum[q^m0 num[m0],{m0,0,M}];
    
+   Print[fullfactexpo[#]-tbound[#]]&/@Range[0,M];
+   
    Print["at level q^",#," I solved for ", Length[List@@Expand[numsolved[#]]]," coefficients and couldn't solve for ",
    Length[List@@Expand[numUnsolved[#]]]," coefficients"]&/@Range[0,M];
+   
+   Print[numsolved[#]]&/@Range[0,M];
+   
+   Return[pn[0]];
    
    On[Solve::svars]; 
    

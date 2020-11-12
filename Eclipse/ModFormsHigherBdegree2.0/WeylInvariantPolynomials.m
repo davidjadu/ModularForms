@@ -29,6 +29,7 @@ XtoZbasis::usage="It takes from the orthogonal to the coweights basis"
 ZtoTbasis::usage="Basis change"
 XtoTbasis::usage="Basis change"
 ZtoXbasis::usage="Basis change"
+TtoXbasis::usage="Basis change"
 
 (*
 Tregulator::usage="regulator for the weyl invariant poly"
@@ -46,7 +47,7 @@ Pol[label_, n_, rk_] :=
  Total[(a[label, #]) (Times @@ (Array[p, rk + 1, {0, rk}]^#)) & /@ 
    Flatten[Permutations /@ (Join[#, Table[0, rk + 1 - Length[#]]] & /@
         IntegerPartitions[n, rk + 1]), 1]]
-  
+TtoXbasis[algebra_]:=Solve[Table[X[i]==(X[i]/.XtoTbasis[algebra]),{i,1,Rank[algebra]}],Array[t[algebra,#]&,Rank[algebra]]][[1]]
 
 XtoZbasis[algebra_] := Module[{ZZ, XX}, ZZ = Array[Z[algebra, #] &, Rank[algebra]];
  XX = Array[X, Rank[algebra]];
@@ -102,31 +103,46 @@ PolyToWeylIncomplete[algebra_, poly_,bound_] :=
         Array[t[algebra, #]^ -1 &, Rank[algebra]]]) & /@ Range[Rank[algebra]] // 
     Transpose (* 
   This are (minus) the most negative exponents that appear in tInv*);
+
   pReplacement = p[#] -> tInv[algebra, #] & /@ Range[Rank[algebra]];
-  polyRed = poly;
+  polyRed =1+((Expand[# - Coefficient[#, \[Epsilon], 0] - \[Epsilon] Coefficient[#, \[Epsilon], 1]] &@
+      Expand[poly/. t[name__] :> \[Epsilon] t[name]]) /. (\[Epsilon]^
+        n_ /; n > -bound :> 0)) /. \[Epsilon] -> 1;
   decompList = {};
   stop = False;
   While[!stop&&!NumberQ[polyRed],
    polyToMonis = {List @@ Expand[polyRed]}//Flatten;
    monisToVectors = moniToVector[#] & /@ polyToMonis;
    decompositions = LinearSolve[seedsListT, #] & /@ monisToVectors;
+
    linGenListVectors = 
     Select[decompositions, allEntriesPositiveOrZero[#] &];
+    
    linGenListMonis = vectorToMonis[#] & /@ linGenListVectors;
+
    posPosEs = 
     Flatten[Position[decompositions, #] & /@ linGenListVectors];
    posXVs = monisToVectors[[#]] & /@ posPosEs;
    posXs = polyToMonis[[#]] & /@ posPosEs;
    sumsList = Plus @@@ (Abs[#] & /@ posXVs);
    maxSumsList = Max[Plus @@@ sumsList];
-   If[maxSumsList<bound,stop=True]; (*To ensure we don't go farther that we can with the info we have*)
+
+
+   If[maxSumsList<bound,Break[]]; (*To ensure we don't go farther that we can with the info we have*)
+   
    posT = Flatten[Position[sumsList, maxSumsList]][[1]];
    coeff = posXs[[posT]] /. t[__] -> 1;
+
+   
    monomInGens = coeff linGenListMonis[[posT]];
    decompList = Join[decompList, {monomInGens}];
-   polyRed =1+(Expand[# - Coefficient[#, \[Epsilon], 0] - \[Epsilon] Coefficient[#, \[Epsilon], 1]]&@
-    Expand[polyRed - monomInGens /. pReplacement/.(t[__]^n_ /; n > 0:> 0)/.t[name__]:>\[Epsilon] t[name]]
-   	/.(\[Epsilon]^n_ /; n >-bound:> 0))/.\[Epsilon]->1;(*This removes everything beyond the bound*)
+
+  (* Return[polyRed-monomInGens/.pReplacement];*)
+   
+   polyRed =1+((Expand[# - Coefficient[#, \[Epsilon], 0] - \[Epsilon] Coefficient[#, \[Epsilon], 1]] &@
+      Expand[polyRed - monomInGens /. pReplacement/. t[name__] :> \[Epsilon] t[name]]) /. (\[Epsilon]^
+        n_ /; n > -bound :> 0)) /. \[Epsilon] -> 1;
+
   ];
 
   
